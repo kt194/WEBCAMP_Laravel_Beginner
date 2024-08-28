@@ -4,19 +4,19 @@
 @section('title')(詳細画面)@endsection
 
 {{-- メインコンテンツ --}}
-@section('contents')
+@section('contets')
         <h1>タスクの登録(未実装)</h1>
             <form action="./top.html" method="post">
-                タスク名：<input><br>
-                期限：<input type="date"><br>
-                タスク詳細：<textarea></textarea><br>
-                重要度：<label><input type="radio" name="priority">低い</label> /
-                    <label><input type="radio" name="priority" checked>普通</label> /
+                タスク名:<input><br>
+                期限:<input type="date"><br>
+                タスク詳細:<textarea></textarea><br>
+                重要度:<label><input type="radio" name="priority">低い</label> / 
+                    <label><input type="radio" name="priority" checked>普通</label> / 
                     <label><input type="radio" name="priority">高い</label><br>
                 <button>タスクを登録する</button>
             </form>
 
-        <h1>タスク一覧(未実装)</h1>
+        <h1>タスクの一覧(未実装)</h1>
         <a href="./top.html">CSVダウンロード(未実装)</a><br>
         <table border="1">
         <tr>
