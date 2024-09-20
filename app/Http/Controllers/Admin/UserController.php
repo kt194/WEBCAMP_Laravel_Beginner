@@ -7,6 +7,7 @@ use App\Models\User as UserModel;
 
 class UserController extends Controller
 {
+
     /**
      * ユーザの一覧 を表示する
      * 
@@ -14,7 +15,6 @@ class UserController extends Controller
      */
     public function list()
     {
-        // データの取得
         $group_by_column = ['users.id', 'users.name'];
         $list = UserModel::select($group_by_column)
                          ->selectRaw('count(tasks.id) AS task_num')
@@ -22,10 +22,8 @@ class UserController extends Controller
                          ->groupBy($group_by_column)
                          ->orderBy('users.id')
                          ->get();
-        echo "<pre>\n";
-        var_dump($list->toArray()); exit;
-
+        //echo "<pre>\n";
+        //var_dump($list->toArray()); exit;
         return view('admin.user.list', ['users' => $list]);
     }
-
 }
