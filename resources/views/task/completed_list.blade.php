@@ -14,7 +14,7 @@
             <th>期限
             <th>重要度
             <th>タスク完了日</th>
-    @foreach ($tasks as $task)
+    @foreach ($list as $task)
         <tr>
             <td>{{ $task->name }}
             <td>{{ $task->period }}

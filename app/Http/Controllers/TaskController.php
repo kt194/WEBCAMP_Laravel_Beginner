@@ -14,15 +14,15 @@ class TaskController extends Controller
 {
     /**
      * タスク一覧ページ を表示する
-     *
+     * 
      * @return \Illuminate\View\View
      */
     public function list()
     {
-
+        
         // 1Page辺りの表示アイテム数を設定
-        $per_page =2;
-
+        $per_page = 2;
+        
         // 一覧の取得
         $list = $this->getListBuilder()
                      ->paginate($per_page);
@@ -33,10 +33,10 @@ class TaskController extends Controller
         //echo "<pre>\n"; var_dump($sql, $list); exit;
         var_dump($sql);
         */
-
+        
         return view('task.list', ['list' => $list]);
     }
-
+    
     /**
      * タスクの新規登録
      */
@@ -67,7 +67,7 @@ class TaskController extends Controller
         // リダイレクト
         return redirect('/task/list');
     }
-
+    
     /**
      * タスクの詳細閲覧
      */
@@ -75,7 +75,7 @@ class TaskController extends Controller
     {
         return $this->singleTaskRender($task_id, 'task.detail');
     }
-
+    
     /**
      * タスクの編集画面表示
      */
@@ -83,7 +83,7 @@ class TaskController extends Controller
     {
         return $this->singleTaskRender($task_id, 'task.edit');
     }
-
+    
     /**
      * タスクの編集処理
      */
@@ -116,8 +116,8 @@ class TaskController extends Controller
         $request->session()->flash('front.task_edit_success', true);
         // 詳細閲覧画面にリダイレクトする
         return redirect(route('detail', ['task_id' => $task->id]));
-    }
-
+    } 
+    
     /**
      * 削除処理
      */
@@ -135,7 +135,7 @@ class TaskController extends Controller
         // 一覧に遷移する
         return redirect('/task/list');
     }
-
+    
     /**
      * タスクの完了
      */
@@ -224,6 +224,7 @@ class TaskController extends Controller
             // CSVの1行を出力
             $file->fputcsv($awk);
         }
+
         // 現在のバッファの中身を取得し、出力バッファを削除する
         $csv_string = ob_get_clean();
 
@@ -237,18 +238,7 @@ class TaskController extends Controller
                 ->header('Content-Type', 'text/csv')
                 ->header('Content-Disposition', 'attachment; filename="' . $download_filename . '"');
     }
-
-    /**
-     * 一覧用の Illuminate\Database\Eloquent\Builder インスタンスの取得
-     */
-    protected function getListBuilder()
-    {
-        return TaskModel::where('user_id', Auth::id())
-                     ->orderBy('priority', 'DESC')
-                     ->orderBy('period')
-                     ->orderBy('created_at');
-    }
-
+    
     /**
      * 「単一のタスク」Modelの取得
      */
@@ -263,7 +253,7 @@ class TaskController extends Controller
         if ($task->user_id !== Auth::id()) {
             return null;
         }
-
+        
         return $task;
     }
 
@@ -281,4 +271,15 @@ class TaskController extends Controller
         // テンプレートに「取得したレコード」の情報を渡す
         return view($template_name, ['task' => $task]);
     }
+    
+    /**
+     * 一覧用の Illuminate\Database\Eloquent\Builder インスタンスの取得
+     */
+    protected function getListBuilder()
+    {
+        return TaskModel::where('user_id', Auth::id())
+                     ->orderBy('priority', 'DESC')
+                     ->orderBy('period')
+                     ->orderBy('created_at');
+    }    
 }

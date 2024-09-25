@@ -12,7 +12,7 @@ class CompletedTask extends Model
     /**
      * 複数代入不可能な属性
      */
-    protected $guarded = ['id'];
+    protected $guarded = [];
 
     /**
      * 「重要度」用の定数
