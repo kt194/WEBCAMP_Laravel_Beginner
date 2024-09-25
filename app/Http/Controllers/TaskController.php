@@ -14,15 +14,15 @@ class TaskController extends Controller
 {
     /**
      * タスク一覧ページ を表示する
-     * 
+     *
      * @return \Illuminate\View\View
      */
     public function list()
     {
-        
+
         // 1Page辺りの表示アイテム数を設定
-        $per_page = 2;
-        
+        $per_page =2;
+
         // 一覧の取得
         $list = $this->getListBuilder()
                      ->paginate($per_page);
@@ -33,7 +33,7 @@ class TaskController extends Controller
         //echo "<pre>\n"; var_dump($sql, $list); exit;
         var_dump($sql);
         */
-        
+
         return view('task.list', ['list' => $list]);
     }
 
@@ -136,7 +136,7 @@ class TaskController extends Controller
         return redirect('/task/list');
     }
 
-     /**
+    /**
      * タスクの完了
      */
     public function complete(Request $request, $task_id)
@@ -237,7 +237,7 @@ class TaskController extends Controller
                 ->header('Content-Type', 'text/csv')
                 ->header('Content-Disposition', 'attachment; filename="' . $download_filename . '"');
     }
-    
+
     /**
      * 一覧用の Illuminate\Database\Eloquent\Builder インスタンスの取得
      */
@@ -248,7 +248,7 @@ class TaskController extends Controller
                      ->orderBy('period')
                      ->orderBy('created_at');
     }
-    
+
     /**
      * 「単一のタスク」Modelの取得
      */
